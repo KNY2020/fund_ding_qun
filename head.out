@@ -1,0 +1,20 @@
+HTTP/1.1 200 OK
+Server: NWS_TCloud_static_msoc2
+Date: Fri, 20 Aug 2021 07:59:43 GMT
+Expires: Fri, 20 Aug 2021 08:09:43 GMT
+Content-Type: application/x-javascript
+X-NWS-UUID-VERIFY: ede978b18573ec6764cd9c5dbdfd622c
+X-Cache-Lookup: Hit From Disktank3
+ETag: "10952d489995d71:0"
+X-Powered-By: ASP.NET
+X-Daa-Tunnel: hop_count=1
+X-Cache-Lookup: Hit From Inner Cluster
+Accept-Ranges: bytes
+X-Cache-Lookup: Cache Miss
+Last-Modified: Fri, 20 Aug 2021 07:59:20 GMT
+Cache-Control: max-age=600
+Content-Length: 163
+X-NWS-LOG-UUID: 105951134667159879
+Connection: keep-alive
+X-Cache-Lookup: Hit From Inner Cluster
+
