@@ -94,8 +94,8 @@ static fund* send_cmd()
 	memset(buff,0x00,1500);
 	//整合发送到qun里的输出信息
 	sprintf(buff, "基金代码:%d\n基金名称:%s\n净值日期:%s\n当日净值:%lf\n估算净值:%lf\n估算涨跌百分比:%f\n估值时间:%s", fun->fundcode, fun->name, fun->jzrq, fun->dwjz, fun->gsz, fun->gszzl, fun->gztime);
-	//sprintf钉钉的curl接口，修改成你的机器人的webhook的tooken
-	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=a31cd21bfa971dd4e05b2b1e818bd497e68edc12fd1fc5a00243f4be139c8acf' \
+	//sprintf钉钉的curl接口，修改成你的机器人的webhook的tooken，****为机器人的webhook的tooken
+	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=*************' \
 	  -H 'Content-Type: application/json' \
    	-d '{\"msgtype\": \"text\",\"text\": {\"content\": \"{%s\n}\"}}'",buff);
 	printf("%s\n",cmd);
