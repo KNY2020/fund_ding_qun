@@ -9,10 +9,18 @@ Description:获取基金信息发送到钉钉qun里
 #include <string.h>
 #include <stdlib.h>
 #include "detect_version.h"
-#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 #include "cJSON.h"
 
 #define url_path "./body.out"
+
+static int fund_code[3] =
+{
+	4433,
+	161725,
+	160516
+};
 
 typedef struct {
 	int fundcode;	//基金代码
@@ -62,16 +70,14 @@ Input:          NULL
 Output:         基金信息字符串 
 Return:         基金信息结构体
 *************************************************/  
-static fund* send_cmd()
+static fund* send_cmd(int scanf_num)
 {
 	char cmd[5120] = { 0 };
 	char buff[1500] = { 0 };
 	char str_fund[1024] = {0};
 	
-	int scanf_num = 0;	
 	char url_char[64]={0};
-	//输入基金代码
-	scanf("%d",&scanf_num);
+	
 	//整合获取基金信息的url
 	sprintf(url_char,"http://fundgz.1234567.com.cn/js/%06d.js",scanf_num);
 	//curl整合的url，保存接收的字符串到 body.out
@@ -94,8 +100,8 @@ static fund* send_cmd()
 	memset(buff,0x00,1500);
 	//整合发送到qun里的输出信息
 	sprintf(buff, "基金代码:%d\n基金名称:%s\n净值日期:%s\n当日净值:%lf\n估算净值:%lf\n估算涨跌百分比:%f\n估值时间:%s", fun->fundcode, fun->name, fun->jzrq, fun->dwjz, fun->gsz, fun->gszzl, fun->gztime);
-	//sprintf钉钉的curl接口，修改成你的机器人的webhook的tooken，****为机器人的webhook的tooken
-	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=*************' \
+	//sprintf钉钉的curl接口，**********修改成你的机器人的webhook的tooken
+	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=***************' \
 	  -H 'Content-Type: application/json' \
    	-d '{\"msgtype\": \"text\",\"text\": {\"content\": \"{%s\n}\"}}'",buff);
 	printf("%s\n",cmd);
@@ -107,10 +113,34 @@ static fund* send_cmd()
 
 int main()
 {
-
 	fund* p= NULL;
 
-	p = send_cmd();
+	time_t now_time;
+
+	struct tm *now_tm;
+
+	while(1)
+	{
+
+		time(&now_time);
+
+		now_tm = gmtime(&now_time);
+		now_tm->tm_hour += 8;
+		now_tm->tm_year += 1900;
+		now_tm->tm_mon += 1;
+
+		if(now_tm->tm_wday < 5 && now_tm->tm_hour >= 9 && now_tm->tm_hour <= 15)
+		{
+			if(now_tm->tm_min == 0 || now_tm->tm_min == 30)
+			{
+				for(int i = 0;i < 3 ;i++)
+				{
+					p = send_cmd(fund_code[i]);
+				}
+			}
+		}
+		sleep(60);
+	}
 
 	free(p);
 	
