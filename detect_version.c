@@ -51,11 +51,7 @@ int detect_version(char * url)
  
     static const char * bodyfilename = BODY_OUT;
  
-    // char buffer[STR_LEN] = {'\0'};
- 
     int res = 0;
- 
-    printf("url=%s\n",url);
  
     curl_global_init(CURL_GLOBAL_ALL);
  
