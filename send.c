@@ -157,6 +157,7 @@ int main()
 					send_cmd(fund_code[i], msg);
 				}
 				send_dingding_qun(msg);
+				memset(msg,0x00,2048);
 			}
 		}
 		sleep(60);
