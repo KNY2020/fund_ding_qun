@@ -15,11 +15,13 @@ Description:获取基金信息发送到钉钉qun里
 
 #define url_path "./body.out"
 
-static int fund_code[3] =
+static int fund_code[5] =
 {
 	4433,
 	161725,
-	160516
+	160516，
+	3096,
+	260108
 };
 
 typedef struct {
@@ -150,7 +152,7 @@ int main()
 		{
 			if (now_tm->tm_min == 0 || now_tm->tm_min == 30)
 			{
-				for (int i = 0;i < 3;i++)
+				for (int i = 0;i < 5;i++)
 				{
 					send_cmd(fund_code[i], msg);
 				}
