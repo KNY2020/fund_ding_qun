@@ -140,7 +140,6 @@ int main()
 
 	while (1)
 	{
-
 		time(&now_time);
 
 		now_tm = gmtime(&now_time);
