@@ -76,8 +76,8 @@ static int send_dingding_qun(char* msg)
 {
 	char cmd[5120] = { 0 };
 
-	//sprintf钉钉的curl接口，修改成你的机器人的webhook的tooken
-	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=a31cd21bfa971dd4e05b2b1e818bd497e68edc12fd1fc5a00243f4be139c8acf' \
+	//sprintf钉钉的curl接口，修改成你的机器人的webhook的token
+	sprintf(cmd, "curl 'https://oapi.dingtalk.com/robot/send?access_token=**************************' \
 	  -H 'Content-Type: application/json' \
    	-d '{\"msgtype\": \"text\",\"text\": {\"content\": \"{%s\n}\"}}'", msg);
 	printf("%s\n", cmd);
