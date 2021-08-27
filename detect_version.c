@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "curl/curl.h"
+
 #define HEAD_OUT "./head.out"
 #define BODY_OUT "./body.out"
 #define RET_EQUAL 0
@@ -33,11 +34,13 @@
 #define DOWNLOAD_OK 26
 #define LOG fprintf
 #define LOG_NOTICE stderr
+
 size_t write_data(void * ptr, size_t size, size_t nmemb, void* stream)
 {
     int written = fwrite(ptr, size, nmemb, (FILE *)stream);
     return written;
 }
+
 int detect_version(char * url)
 {
  
